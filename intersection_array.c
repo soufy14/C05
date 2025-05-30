@@ -1,43 +1,43 @@
 #include <stdio.h>
 
 int main() {
-    int n, m, i, j, k = 0;
-    scanf("%d", &n);
+    int n1, n2;
 
-    int tab1[n];
-    for (i = 0; i < n; i++) {
-        scanf("%d", &tab1[i]);
-    }
-    scanf("%d", &m);
+    // Lecture du premier tableau
+    scanf("%d", &n1);
+    int a[n1];
+    for (int i = 0; i < n1; i++)
+        scanf("%d", &a[i]);
 
-    int tab2[m];
-    for (i = 0; i < m; i++) {
-        scanf("%d", &tab2[i]);
-    }
-    // Afficher les éléments présents dans les deux tableaux (intersection)
-    printf("Intersection : ");
-    for (i = 0;i < n; i++) {
-        // Étape 1 : vérifier si tab1[i] existe dans tab2
-        int found = 0;
-        for (j = 0; j < m; j++) {
-            if (tab1[i] == tab2[j]) {
-                found = 1;
-                break; // inutile de continuer
-            }
-        }
-        // Étape 2 : éviter les doublons (si déjà apparu dans tab1)
+    // Lecture du deuxième tableau
+    scanf("%d", &n2);
+    int b[n2];
+    for (int i = 0; i < n2; i++)
+        scanf("%d", &b[i]);
+
+    // Affichage des éléments communs sans doublons
+    printf("Intersection :");
+    for (int i = 0; i < n1; i++) {
         int deja_affiche = 0;
-        for (k = 0; k < i; k++) {
-            if (tab1[i] == tab1[k]) {
+
+        // Vérifie si a[i] a déjà été vu dans a[]
+        for (int k = 0; k < i; k++) {
+            if (a[i] == a[k]) {
                 deja_affiche = 1;
                 break;
             }
         }
-        // Étape 3 : afficher seulement si trouvé dans tab2 et pas encore affiché
-        if (found && !deja_affiche) {
-            printf("%d ", tab1[i]);
+        if (deja_affiche) continue;
+
+        // Vérifie si a[i] existe dans b[]
+        for (int j = 0; j < n2; j++) {
+            if (a[i] == b[j]) {
+                printf(" %d", a[i]);
+                break;
+            }
         }
     }
+
     printf("\n");
     return 0;
 }
